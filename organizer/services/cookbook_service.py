@@ -1,7 +1,7 @@
 from typing import List
 
-from models import db
-from models.cookbook_model import Recipe as RecipeModel
+from organizer.models import db
+from organizer.models.cookbook_model import Recipe as RecipeModel
 
 
 class Ingredient:

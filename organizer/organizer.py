@@ -1,7 +1,7 @@
 from flask import Flask
 
-from models import db
-from resources import api
+from organizer.models import db
+from organizer.resources import api
 
 
 def create_organizer():

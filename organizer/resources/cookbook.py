@@ -1,6 +1,6 @@
 from flask_restx import fields, Namespace, reqparse, Resource
 
-from services import cookbook_service as cs
+from organizer.services import cookbook_service as cs
 
 cookbook = Namespace("cookbook")
 
