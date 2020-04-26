@@ -4,7 +4,7 @@ from models import db
 from resources import api
 
 
-if __name__ == "__main__":
+def create_organizer():
     organizer = Flask(__name__)
     organizer.config.from_object("config.Config")
 
@@ -16,4 +16,9 @@ if __name__ == "__main__":
     db.create_all()
     app_context.pop()
 
+    return organizer
+
+
+if __name__ == "__main__":
+    organizer = create_organizer()
     organizer.run(debug=True, port=5000)
