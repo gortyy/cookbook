@@ -11,8 +11,9 @@ black = "*"
 
 [packages]
 flask = "*"
+flask-bootstrap = "*"
+flask-mail = "*"
 flask-sqlalchemy = "*"
-flask-restx = "*"
 
 [requires]
 python_version = "3.8"
