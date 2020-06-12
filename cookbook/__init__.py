@@ -4,6 +4,7 @@ import flask_mail
 import flask_sqlalchemy
 
 from config import config
+from cookbook.main.resources.main import main
 
 
 bootstrap = flask_bootstrap.Bootstrap()
@@ -18,5 +19,7 @@ def create_app(config_name):
     bootstrap.init_app(app)
     mail.init_app(app)
     db.init_app(app)
+
+    app.register_blueprint(main)
 
     return app
