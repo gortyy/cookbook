@@ -10,6 +10,14 @@ class Chef(db.Model):
 
     cookbooks = db.relationship("Cookbook", backref="chef")
 
+    @classmethod
+    def get_all(cls):
+        return cls.query.all()
+
+    @classmethod
+    def get_by_name(cls, name):
+        return cls.query.filter_by(name=name).first()
+
 
 class Cookbook(db.Model):
     __tablename__ = "cookbooks"
@@ -17,6 +25,22 @@ class Cookbook(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), nullable=False, unique=True)
     chef_id = db.Column(db.Integer, db.ForeignKey("chefs.id"))
+
+    @classmethod
+    def get_by_name(cls, name):
+        return cls.query.filter_by(name=name).first()
+
+    @classmethod
+    def get_all(cls):
+        return cls.query.all()
+
+    @classmethod
+    def add(cls, name, recipes=None):
+        if recipes is None:
+            recipes = []
+        cookbook = cls(name=name, recipes=recipes)
+        db.session.add(cookbook)
+        db.session.commit()
 
 
 cookbook_recipe_association = db.Table(
@@ -51,6 +75,14 @@ class Recipe(db.Model):
         backref=db.backref("recipes"),
     )
 
+    @classmethod
+    def get_by_name(cls, name):
+        return cls.query.filter_by(name=name).first()
+
+    @classmethod
+    def get_all(cls):
+        return cls.query.all()
+
 
 class Category(db.Model):
     __tablename__ = "categories"
@@ -63,6 +95,14 @@ class Category(db.Model):
         secondary=recipe_category_association,
         backref=db.backref("categories"),
     )
+
+    @classmethod
+    def get_by_name(cls, name):
+        return cls.query.filter_by(name=name).first()
+
+    @classmethod
+    def get_all(cls):
+        return cls.query.all()
 
 
 class Product(db.Model):
@@ -77,3 +117,11 @@ class Product(db.Model):
         secondary=recipe_product_association,
         backref=db.backref("products"),
     )
+
+    @classmethod
+    def get_by_name(cls, name):
+        return cls.query.filter_by(name=name).first()
+
+    @classmethod
+    def get_all(cls):
+        return cls.query.all()
