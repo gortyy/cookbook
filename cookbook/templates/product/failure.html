@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Cookbook{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h2>{{ session.get("product_error_type") }}</h2>
+    <h3>{{ session.get("product_exception") }}</h3>
+</div>
+{% endblock %}
