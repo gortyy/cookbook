@@ -5,7 +5,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    pass
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class DevConfig(Config):

@@ -14,6 +14,7 @@ flask = "*"
 flask-bootstrap = "*"
 flask-mail = "*"
 flask-sqlalchemy = "*"
+flask-wtf = "*"
 
 [requires]
 python_version = "3.8"

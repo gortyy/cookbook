@@ -125,3 +125,11 @@ class Product(db.Model):
     @classmethod
     def get_all(cls):
         return cls.query.all()
+
+    @classmethod
+    def add(cls, name, shop_link=None):
+        product = cls(name=name, shop_link=shop_link)
+        db.session.add(product)
+        db.session.commit()
+
+        return product

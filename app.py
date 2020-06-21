@@ -7,6 +7,7 @@ from cookbook.main import models
 
 
 app = cookbook.create_app(os.getenv("FLASK_CONFIG") or "default")
+app.secret_key = os.getenv("FLASK_SECRET")
 migrate = flask_migrate.Migrate(app, cookbook.db)
 
 

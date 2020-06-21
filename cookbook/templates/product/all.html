@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Cookbook{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h2>All products:</h2>
+    {% for product in products %}
+    <p>Name: {{ product.name }}, Shop link: {{ product.shop_link }}</p>
+    {% endfor %}
+</div>
+{% endblock %}
