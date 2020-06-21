@@ -20,7 +20,7 @@ def product(name):
 
 
 @product_blueprint.route("/added")
-def product_added():
+def added():
     return flask.render_template("product/success.html")
 
 
@@ -30,20 +30,19 @@ def failure():
 
 
 @product_blueprint.route("/create", methods=["GET", "POST"])
-def create_product():
+def create():
     form = ProductForm()
     if form.validate_on_submit():
         product_name = form.name.data
         link = form.link.data
-        print(link)
         try:
             product = Product.add(product_name, link)
         except Exception as exc:
             flask.session["product_error_type"] = "Failed adding product."
             flask.session["product_exception"] = str(exc)
-            return flask.redirect(flask.url_for("product.failure"))
+            return flask.redirect(flask.url_for(".failure"))
         else:
             flask.session["product_name"] = product.name
-            return flask.redirect(flask.url_for("product.product_added"))
+            return flask.redirect(flask.url_for(".added"))
 
     return flask.render_template("product/create.html", form=form)

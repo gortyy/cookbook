@@ -42,6 +42,8 @@ class Cookbook(db.Model):
         db.session.add(cookbook)
         db.session.commit()
 
+        return cookbook
+
 
 cookbook_recipe_association = db.Table(
     "cookbook_recipe_association",
