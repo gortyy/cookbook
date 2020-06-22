@@ -78,6 +78,25 @@ class Recipe(db.Model):
     )
 
     @classmethod
+    def add(cls, name, instruction, categories=None, products=None):
+        if categories is None:
+            categories = []
+        if products is None:
+            products = []
+
+        recipe = cls(
+            name=name,
+            instruction=instruction,
+            categories=categories,
+            products=products,
+        )
+
+        db.session.add(recipe)
+        db.session.commit()
+
+        return recipe
+
+    @classmethod
     def get_by_name(cls, name):
         return cls.query.filter_by(name=name).first()
 

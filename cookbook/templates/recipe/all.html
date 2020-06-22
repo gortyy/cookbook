@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Recipes{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h2>All recipes:</h2>
+    {% for recipe in recipes %}
+    <p><a href="{{ url_for('recipe.recipe', name=recipe.name) }}">{{ recipe.name }}</a> </p>
+    {% endfor %}
+</div>
+{% endblock %}

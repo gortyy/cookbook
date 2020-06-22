@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Recipe{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h2>Recipe {{ session.get('recipe_name') }} added.</h2>
+</div>
+{% endblock %}
