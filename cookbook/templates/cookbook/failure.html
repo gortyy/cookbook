@@ -5,9 +5,7 @@
 
 {% block page_content %}
 <div class="page-header">
-    <h2>All products:</h2>
-    {% for product in products %}
-    <p><a href="{{ url_for('product.product', name=product.name) }}">{{ product.name }}</a></p>
-    {% endfor %}
+    <h2>{{ session.get("cookbook_error_type") }}</h2>
+    <h3>{{ session.get("cookbook_error_msg") }}</h3>
 </div>
 {% endblock %}

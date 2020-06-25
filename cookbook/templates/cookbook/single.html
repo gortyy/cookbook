@@ -5,9 +5,9 @@
 
 {% block page_content %}
 <div class="page-header">
-    <h2>All products:</h2>
-    {% for product in products %}
-    <p><a href="{{ url_for('product.product', name=product.name) }}">{{ product.name }}</a></p>
+    <h1>Name: {{ cookbook.name }}</h1>
+    {% for recipe in cookbook.recipes %}
+    <p>{{ loop.index }}. <a href="{{ url_for('recipe.recipe', name=recipe.name) }}">{{ recipe.name }}</a></p>
     {% endfor %}
 </div>
 {% endblock %}
