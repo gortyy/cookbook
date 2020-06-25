@@ -1,7 +1,7 @@
 import flask
 
 from cookbook.main.forms.recipe_form import RecipeForm
-from cookbook.main.models import Category, Product, Recipe
+from cookbook.main.models import Product, Recipe
 
 
 recipe_blueprint = flask.Blueprint("recipe", __name__)
@@ -29,13 +29,9 @@ def create():
         try:
             recipe = Recipe.add(
                 name=form.name.data,
-                products=[
-                    Product.get_by_name(name) for name in form.products.data
-                ],
+                products=form.products.data,
                 instruction=form.instruction.data,
-                categories=[
-                    Category.get_by_name(name) for name in form.categories.data
-                ],
+                categories=form.categories.data,
             )
         except Exception as exc:
             flask.session["recipe_error_type"] = "Could not create recipe"

@@ -22,28 +22,17 @@ def cookbook(name):
 @cookbook_blueprint.route("/create", methods=["GET", "POST"])
 def create():
     form = CookbookForm()
+    form.recipes.choices = [
+        (recipe.name, recipe.name) for recipe in Recipe.get_all()
+    ]
     if form.validate_on_submit():
-        cookbook_name = form.name.data
-        recipes = [
-            Recipe.get_by_name(recipe_name)
-            for recipe_name in form.recipes.data.split(",")
-        ]
-        recipes = []
-        missing_recipes = []
-        for recipe_name in form.recipes.data.strip().split(", "):
-            if recipe := Recipe.get_by_name(recipe_name):
-                recipes.append(recipe)
-            else:
-                missing_recipes.append(recipe_name)
-        missing_recipes = [
-            missing for missing in missing_recipes if missing != ""
-        ]
-        if missing_recipes:
-            flask.session["cookbook_error_type"] = "Missing recipes"
-            flask.session["missing_recipes"] = ", ".join(missing_recipes)
+        try:
+            cookbook = Cookbook.add(form.name.data, recipes=form.recipes.data)
+        except Exception as exc:
+            flask.session["cookbook_error_type"] = "Could not create cookbook."
+            flask.session["cookbook_error_msg"] = str(exc)
             return flask.redirect(flask.url_for(".failure"))
 
-        cookbook = Cookbook.add(cookbook_name, recipes)
         flask.session["cookbook_name"] = cookbook.name
         return flask.redirect(flask.url_for(".added"))
 

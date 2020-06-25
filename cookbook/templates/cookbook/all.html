@@ -7,10 +7,7 @@
 <div class="page-header">
     <h2>All cookbooks:</h2>
     {% for cookbook in cookbooks %}
-    <p>Cookbook: {{ cookbook.name }}</p>
-    {% for recipe in cookbook.recipes %}
-    <p>{{ loop.index }}. {{ recipe.name }} {{ url_for("recipe.recipe", name=recipe.name) }}</p>
-    {% endfor %}
+    <p>{{ loop.index }}. <a href="{{ url_for('cookbook.cookbook', name=cookbook.name) }}">{{ cookbook.name }}</a></p>
     {% endfor %}
 </div>
 {% endblock %}

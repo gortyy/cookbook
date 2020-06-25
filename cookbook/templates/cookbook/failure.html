@@ -6,6 +6,6 @@
 {% block page_content %}
 <div class="page-header">
     <h2>{{ session.get("cookbook_error_type") }}</h2>
-    <h3>{{ session.get("missing_recipes") }}</h3>
+    <h3>{{ session.get("cookbook_error_msg") }}</h3>
 </div>
 {% endblock %}

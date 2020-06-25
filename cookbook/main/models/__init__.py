@@ -38,7 +38,10 @@ class Cookbook(db.Model):
     def add(cls, name, recipes=None):
         if recipes is None:
             recipes = []
-        cookbook = cls(name=name, recipes=recipes)
+
+        recipe_entities = [Recipe.get_by_name(recipe) for recipe in recipes]
+
+        cookbook = cls(name=name, recipes=recipe_entities)
         db.session.add(cookbook)
         db.session.commit()
 
@@ -84,11 +87,18 @@ class Recipe(db.Model):
         if products is None:
             products = []
 
+        product_entities = [
+            Product.get_by_name(product_name) for product_name in products
+        ]
+        category_entities = [
+            Category.get_by_name(category_name) for category_name in categories
+        ]
+
         recipe = cls(
             name=name,
             instruction=instruction,
-            categories=categories,
-            products=products,
+            categories=category_entities,
+            products=product_entities,
         )
 
         db.session.add(recipe)
