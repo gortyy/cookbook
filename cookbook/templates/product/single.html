@@ -5,6 +5,6 @@
 
 {% block page_content %}
 <div class="page-header">
-    <h1>Name: {{ product.name }}, Shop link: {{ product.shop_link }}</h1>
+    <h1><a href="{{ product.shop_link }}">{{ product.name }}</a></h1>
 </div>
 {% endblock %}
