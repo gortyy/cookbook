@@ -5,10 +5,7 @@ import wtforms.validators
 from cookbook.main.models.categories import CATEGORIES_LIST
 
 
-class RecipeForm(flask_wtf.FlaskForm):
-    name = wtforms.StringField(
-        "Recipe name", validators=[wtforms.validators.DataRequired()]
-    )
+class RecipeBaseForm(flask_wtf.FlaskForm):
     products = wtforms.SelectMultipleField(
         "Products", validators=[wtforms.validators.DataRequired()],
     )
@@ -17,3 +14,13 @@ class RecipeForm(flask_wtf.FlaskForm):
         "Categories", choices=[(c, c) for c in CATEGORIES_LIST]
     )
     submit = wtforms.SubmitField("Create")
+
+
+class RecipeSearchForm(RecipeBaseForm):
+    pass
+
+
+class RecipeCreateForm(RecipeBaseForm):
+    name = wtforms.StringField(
+        "Recipe name", validators=[wtforms.validators.DataRequired()]
+    )

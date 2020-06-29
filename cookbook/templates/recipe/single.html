@@ -11,5 +11,6 @@
         <li><a href="{{ url_for('product.product', name=product.name) }}">{{ product.name }}</a></li>
         {% endfor %}
     </ol>
+    <p>{{ recipe.instruction }}</p>
 </div>
 {% endblock %}

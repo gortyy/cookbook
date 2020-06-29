@@ -1,3 +1,5 @@
+from sqlalchemy.sql.expression import or_
+
 from cookbook import db
 
 
@@ -113,6 +115,29 @@ class Recipe(db.Model):
     @classmethod
     def get_all(cls):
         return cls.query.all()
+
+    @classmethod
+    def search(cls, search_params):
+        instruction = search_params["instruction"]
+
+        query = cls.query
+        if products := search_params.get("products"):
+            query = query.filter(
+                or_(cls.products.any(name=product) for product in products)
+            )
+
+        if categories := search_params.get("categories"):
+            query = query.filter(
+                or_(
+                    cls.categories.any(name=category)
+                    for category in categories
+                )
+            )
+
+        if instruction := search_params.get("instruction"):
+            query = query.filter(cls.instruction.ilike(f"%{instruction}%"))
+
+        return query.all()
 
 
 class Category(db.Model):
